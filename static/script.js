@@ -844,8 +844,7 @@ function displayPokemon(){
         });
         $("tbody tr").click(function() {
             var $this = $(this);
-            if ($this.hasClass("selected")) {
-                $this.attr("title", "Click to display more information");
+                $this.attr("title", "Click to display more information.");
                 if (isForIndividualPokemon) {
                     populateModal($this);
                     // Unhide modal
@@ -877,7 +876,6 @@ function displayPokemon(){
                         e.preventDefault();
                     });
                 }
-            }
             $this.toggleClass("selected");
             var id = $this.data("id");
             var $markdown = $("#markdown");
@@ -933,8 +931,8 @@ function displayPokemon(){
                 $markdown.append(line);
                 toggleCols();
             }
-        });
-        $("tbody tr").attr("title", "Click to display more information");
+        );
+        $("tbody tr").attr("title", "Click to display more information and");
         if (isForIndividualPokemon) {
             $("body").addClass("shiny");
             $("th.ivs").append(" / <abbr title=\"Effort Values\">EVs</abbr>");
