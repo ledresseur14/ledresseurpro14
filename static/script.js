@@ -1015,18 +1015,17 @@ $(document).ready(function() {
         if (friendCode || inGameName || contactUrl) {
             var trainerInfo = "";
             trainerInfo += "<dl>";
-            if (inGameName) {
                 trainerInfo += "<dt><abbr title=\"In-Game Name\">IGN</abbr></dt>";
                 trainerInfo += "<dd> " + inGameName + "</dd><br />";
-            }
-            if (friendCode) {
                 trainerInfo += "<dt><abbr title=\"Friend Code\">FC</abbr></dt>";
                 trainerInfo += "<dd> " + friendCode + "</dd><br />";
-            }
-			if (contactUrl) {
                 trainerInfo += "<dt><abbr title=\"Discord\">Discord</abbr></dt>";
-                trainerInfo += "<dd> " + contactUrl + "</dd><br />Side note; Click a pokemon to reveal more information!";
-            }
+                trainerInfo += "<dd> " + contactUrl + "</dd><br />";
+                trainerInfo += "<dt><abbr title=\"Info\">Info</abbr></dt>";
+                trainerInfo += "<dd>Click a pokemon for information about it! <br />As far as i know all pokemons are legal. <br />We can contact someone (Team C.E.A.L.) <br />To do a legit check if needed!</dd><br />";
+                trainerInfo += "<dt><abbr title=\"Wanted\">Wanted</abbr></dt>";
+                trainerInfo += "<dd>Events i don't have in my list</dd><br />";		
+				
             trainerInfo += "</dl>";
             $("#trainer-info").prepend(trainerInfo);
         }
