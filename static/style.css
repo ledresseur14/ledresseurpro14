@@ -126,7 +126,7 @@ h1 a:focus, h1 a:hover {
 }
 
 #trainer-info {
-    width: 15em;
+    width: 16em;
     margin: 0 auto 1em
 }
 #trainer-info img{
@@ -143,7 +143,7 @@ h1 a:focus, h1 a:hover {
     width:auto;
 }
 #trainer-info dt:after {
-    content:":"
+    content:": "
 }
 #trainer-info dd {
     width:11em;

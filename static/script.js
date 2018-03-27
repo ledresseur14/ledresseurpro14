@@ -1014,10 +1014,6 @@ $(document).ready(function() {
         $("header h1").prepend("<a href=\"" + contactUrl + "\">" + inGameName + "</a>");
         if (friendCode || inGameName || contactUrl) {
             var trainerInfo = "";
-            if (!trainerIconUrl) {
-                trainerIconUrl = "static/blank.gif";
-            }
-            trainerInfo += "<img src=\"" + trainerIconUrl + "\" alt=\"\" width=\"48\" height=\"48\"><br /><br />";
             trainerInfo += "<dl>";
             if (inGameName) {
                 trainerInfo += "<dt><abbr title=\"In-Game Name\">IGN</abbr></dt>";
