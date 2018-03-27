@@ -140,7 +140,7 @@ h1 a:focus, h1 a:hover {
     display:inline-block
 }
 #trainer-info dt {
-    width:4em
+    width:8em
 }
 #trainer-info dt:after {
     content:":"

@@ -1017,7 +1017,7 @@ $(document).ready(function() {
             if (!trainerIconUrl) {
                 trainerIconUrl = "static/blank.gif";
             }
-            trainerInfo += "<img src=\"" + trainerIconUrl + "\" alt=\"\" width=\"48\" height=\"48\">";
+            trainerInfo += "<img src=\"" + trainerIconUrl + "\" alt=\"\" width=\"48\" height=\"48\"><br />";
             trainerInfo += "<dl>";
             if (inGameName) {
                 trainerInfo += "<dt><abbr title=\"In-Game Name\">IGN</abbr></dt>";
@@ -1026,7 +1026,9 @@ $(document).ready(function() {
             if (friendCode) {
                 trainerInfo += "<dt><abbr title=\"Friend Code\">FC</abbr></dt>";
                 trainerInfo += "<dd>" + friendCode + "</dd>";
-				trainerInfo += "<dt><abbr title=\"Discord\">Discord</abbr></dt>";
+            }
+			if (contactUrl) {
+                trainerInfo += "<dt><abbr title=\"Discord\">Discord</abbr></dt>";
                 trainerInfo += "<dd>" + contactUrl + "</dd>";
             }
             trainerInfo += "</dl>";
