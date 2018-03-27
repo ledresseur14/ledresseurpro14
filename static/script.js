@@ -845,9 +845,9 @@ function displayPokemon(){
         $("tbody tr").click(function() {
             var $this = $(this);
             if ($this.hasClass("selected")) {
-                $this.attr("title", "Click to display more information")); // : '') + "add to Reddit table.");
+                $this.attr("title", "Click to " + (isForIndividualPokemon ? "display more information and " : '') + "add to Reddit table.");
             } else {
-                //$this.attr("title", "Click to remove from Reddit table.")
+                $this.attr("title", "Click to remove from Reddit table.")
                 if (isForIndividualPokemon) {
                     populateModal($this);
                     // Unhide modal
@@ -935,8 +935,8 @@ function displayPokemon(){
                 $markdown.append(line);
                 toggleCols();
             }
-        });*/
-        $("tbody tr").attr("title", "Click to display more information")); //: '') + " add to Reddit table.");
+        });
+        $("tbody tr").attr("title", "Click to " + (isForIndividualPokemon ? "display more information and" : '') + " add to Reddit table.");
         if (isForIndividualPokemon) {
             $("body").addClass("shiny");
             $("th.ivs").append(" / <abbr title=\"Effort Values\">EVs</abbr>");
