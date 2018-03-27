@@ -845,9 +845,7 @@ function displayPokemon(){
         $("tbody tr").click(function() {
             var $this = $(this);
             if ($this.hasClass("selected")) {
-                $this.attr("title", "Click to " + (isForIndividualPokemon ? "display more information and " : '') + "add to Reddit table.");
-            } else {
-                $this.attr("title", "Click to remove from Reddit table.")
+                $this.attr("title", "Click to display more information");
                 if (isForIndividualPokemon) {
                     populateModal($this);
                     // Unhide modal
