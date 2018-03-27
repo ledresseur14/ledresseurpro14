@@ -1012,7 +1012,7 @@ $(document).ready(function() {
         // display trainer info
         $("title").text(inGameName + "'s Pokémon Trading Sheet");
         $("header h1").prepend("<a href=\"" + contactUrl + "\">" + inGameName + "</a>");
-        if (friendCode || inGameName) {
+        if (friendCode || inGameName || contactUrl) {
             var trainerInfo = "";
             if (!trainerIconUrl) {
                 trainerIconUrl = "static/blank.gif";
@@ -1026,6 +1026,10 @@ $(document).ready(function() {
             if (friendCode) {
                 trainerInfo += "<dt><abbr title=\"Friend Code\">FC</abbr></dt>";
                 trainerInfo += "<dd>" + friendCode + "</dd>";
+            }
+			if (contactUrl) {
+                trainerInfo += "<dt><abbr title=\"Contact\">Contact</abbr></dt>";
+                trainerInfo += "<dd>" + contactUrl + "</dd>";
             }
             trainerInfo += "</dl>";
             $("#trainer-info").prepend(trainerInfo);
