@@ -13,7 +13,7 @@ var inGameName = "Johnny";
 // ***********************************************************************************
 // URL of your Reddit/Twitter account
 // ***********************************************************************************
-var contactUrl = "Discord: TheJigmeister#4272";
+var contactUrl = "Discord : TheJigmeister#4272";
 
 // ***********************************************************************************
 // URL of your PGL trainer icon (optional)
