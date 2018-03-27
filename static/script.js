@@ -1017,19 +1017,19 @@ $(document).ready(function() {
             if (!trainerIconUrl) {
                 trainerIconUrl = "static/blank.gif";
             }
-            trainerInfo += "<img src=\"" + trainerIconUrl + "\" alt=\"\" width=\"48\" height=\"48\"><br />";
+            trainerInfo += "<img src=\"" + trainerIconUrl + "\" alt=\"\" width=\"48\" height=\"48\"><br /><br />";
             trainerInfo += "<dl>";
             if (inGameName) {
                 trainerInfo += "<dt><abbr title=\"In-Game Name\">IGN</abbr></dt>";
-                trainerInfo += "<dd>" + inGameName + "</dd>";
+                trainerInfo += "<dd> " + inGameName + "</dd><br />";
             }
             if (friendCode) {
                 trainerInfo += "<dt><abbr title=\"Friend Code\">FC</abbr></dt>";
-                trainerInfo += "<dd>" + friendCode + "</dd>";
+                trainerInfo += "<dd> " + friendCode + "</dd><br />";
             }
 			if (contactUrl) {
                 trainerInfo += "<dt><abbr title=\"Discord\">Discord</abbr></dt>";
-                trainerInfo += "<dd>" + contactUrl + "</dd>";
+                trainerInfo += "<dd> " + contactUrl + "</dd><br />";
             }
             trainerInfo += "</dl>";
             $("#trainer-info").prepend(trainerInfo);
