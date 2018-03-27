@@ -1025,7 +1025,7 @@ $(document).ready(function() {
             }
 			if (contactUrl) {
                 trainerInfo += "<dt><abbr title=\"Discord\">Discord</abbr></dt>";
-                trainerInfo += "<dd> " + contactUrl + "</dd><br />";
+                trainerInfo += "<dd> " + contactUrl + "</dd><br />Side note; Click a pokemon to reveal more information!";
             }
             trainerInfo += "</dl>";
             $("#trainer-info").prepend(trainerInfo);
