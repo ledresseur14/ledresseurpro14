@@ -1026,9 +1026,7 @@ $(document).ready(function() {
             if (friendCode) {
                 trainerInfo += "<dt><abbr title=\"Friend Code\">FC</abbr></dt>";
                 trainerInfo += "<dd>" + friendCode + "</dd>";
-            }
-			if (contactUrl) {
-                trainerInfo += "<dt><abbr title=\"Discord\">Discord</abbr></dt>";
+				trainerInfo += "<dt><abbr title=\"Discord\">Discord</abbr></dt>";
                 trainerInfo += "<dd>" + contactUrl + "</dd>";
             }
             trainerInfo += "</dl>";
