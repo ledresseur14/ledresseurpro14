@@ -991,7 +991,7 @@ function displayPokemon(){
 // Default values for config stuff
 spreadsheetId = window.location.search.substring(1) || spreadsheetId;
 var worksheetId = 1;
-var isForIndividualPokemon = true;
+var isForIndividualPokemon = false;
 
 $(document).ready(function() {
     $.getJSON(getWorksheetUrl(spreadsheetId, 1), function(data) {
