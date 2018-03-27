@@ -934,7 +934,7 @@ function displayPokemon(){
                 toggleCols();
             }
         });
-        $("tbody tr").attr("title", "Click to " + (isForIndividualPokemon ? "display more information and" : '') + " add to Reddit table.");
+        $("tbody tr").attr("title", "Click to display more information");
         if (isForIndividualPokemon) {
             $("body").addClass("shiny");
             $("th.ivs").append(" / <abbr title=\"Effort Values\">EVs</abbr>");
