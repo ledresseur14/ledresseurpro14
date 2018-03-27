@@ -842,7 +842,7 @@ function displayPokemon(){
             $(this).find(".sprite").removeClass("up");
             clearInterval(handle);
         });
-        $("tbody tr").click(function() {
+        /*$("tbody tr").click(function() {
             var $this = $(this);
             if ($this.hasClass("selected")) {
                 $this.attr("title", "Click to " + (isForIndividualPokemon ? "display more information and " : '') + "add to Reddit table.");
@@ -935,7 +935,7 @@ function displayPokemon(){
                 $markdown.append(line);
                 toggleCols();
             }
-        });
+        });*/
         $("tbody tr").attr("title", "Click to " + (isForIndividualPokemon ? "display more information and" : '') + " add to Reddit table.");
         if (isForIndividualPokemon) {
             $("body").addClass("shiny");
