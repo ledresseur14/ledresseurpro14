@@ -1011,7 +1011,7 @@ $(document).ready(function() {
         }
         // display trainer info
         $("title").text("Kokkie20's Pokémon Trading Sheet");
-        $("header h1").prepend("Kokkie20");
+        $("header h1").prepend("<a href=\"" + contactUrl + "\">Kokkie20</a>");
         if (friendCode || inGameName || contactUrl) {
             var trainerInfo = "";
             trainerInfo += "<dl>";
