@@ -1010,8 +1010,8 @@ $(document).ready(function() {
             worksheetId = hash;
         }
         // display trainer info
-        $("title").text("Kokkie20's Pokémon Trading Sheet");
-        $("header h1").prepend("Kokkie20");
+        $("title").text(inGameName + "'s Pokémon Trading Sheet");
+        $("header h1").prepend("<a href=\"" + contactUrl + "\">" + inGameName + "</a>");
         if (friendCode || inGameName || contactUrl) {
             var trainerInfo = "";
             trainerInfo += "<dl>";
