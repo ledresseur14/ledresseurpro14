@@ -880,7 +880,7 @@ function displayPokemon(){
                     });
                 }
             }
-            $this.toggleClass("selected");
+            /*$this.toggleClass("selected");
             var id = $this.data("id");
             var $markdown = $("#markdown");
             var $line = $markdown.find(".line[data-id='" + id + "']");
@@ -934,7 +934,7 @@ function displayPokemon(){
                 line = "<span class=\"line\" data-id=\"" + id + "\">" + line + "<br></span>";
                 $markdown.append(line);
                 toggleCols();
-            }
+            }*/
         });
         $("tbody tr").attr("title", "Click to display more information.");
         if (isForIndividualPokemon) {
