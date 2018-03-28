@@ -946,7 +946,7 @@ function displayPokemon(){
 				} else {
 					checked = "✘";
 				}
-				//line += "<span class=\"check\"> " + checked + "|</span>";
+				line += "<span class=\"check\"> " + checked + "|</span>";
 				//Proofed
 				var proofed = "";
 				if ($this.data("proof")) 
