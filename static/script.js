@@ -608,14 +608,6 @@ function populateModal($this) {
         notes = notes.replace(/\/?(r|u|user)\/([\w_-]{3,20})(?!\/|\w)/g, "<a href=\"http://reddit.com/$1/$2\">/$1/$2</a>");
         $("#pokemon-info").append("<p class=\"notes\">" + notes + "</p>");
     }
-	var checked = $this.data("checked");
-	if (checked) {
-		$("#pokemon-info").append("<p class=\"checked\">" + checked + "</p>");
-	}
-	var proof = $this.data("proof");
-	if (proof) {
-		$("#pokemon-info").append("<p class=\"proof\">" + proof + "</p>");
-	}
     $pokemonInfo.find(".prev a").attr("data-id", prevId);
     $pokemonInfo.find(".next a").attr("data-id", nextId);
 }
