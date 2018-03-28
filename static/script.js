@@ -940,13 +940,13 @@ function displayPokemon(){
                 line += "<span class=\"notes\"> " + $this.data("notes") + " |</span>";
 				// Checked
 				var checked = "";
-				if ($this.data("checked")) 
+				if ($this.data("checked") == "X") 
 				{
 				    checked = "✔";
 				} else {
 					checked = "✘";
 				}
-				line += "<span class=\"check\"> " + checked + "|</span>";
+				//line += "<span class=\"check\"> " + checked + "|</span>";
 				//Proofed
 				var proofed = "";
 				if ($this.data("proof")) 
@@ -955,7 +955,7 @@ function displayPokemon(){
 				} else {
 					proofed = "✘";
 				}
-				line += "<span class=\"proof\"> " + $this.data("proof") + "|</span>";
+				//line += "<span class=\"proof\"> " + $this.data("proof") + "|</span>";
                 // Add line
                 line = "<span class=\"line\" data-id=\"" + id + "\">" + line + "<br></span>";
                 $markdown.append(line);
