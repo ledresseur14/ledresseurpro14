@@ -222,7 +222,7 @@ var Pokemon = function() {
     this.gameMark = undefined;
     this.language = "";
     this.notes = "";
-	this.checked = true;
+	this.checked = false;
 	this.proof = false;
     this.genderRatio = function() {
         if (FEMALE_ONLY_POKEMON.indexOf(this.dexNo) > -1) {
@@ -615,7 +615,7 @@ function displayPokemon(){
     $.getJSON(getWorksheetUrl(spreadsheetId, worksheetId), function(data) {
         var entry = data.feed.entry;
         if (entry && entry[0]) {
-            isForIndividualPokemon = tryGetValue(entry[0], ["nickname","ot","tid","level","lv","lvl","hpev","atkev","defev","spaev","spdev","speev","lang","language","checked","proof"]);
+            isForIndividualPokemon = tryGetValue(entry[0], ["nickname","ot","tid","level","lv","lvl","hpev","atkev","defev","spaev","spdev","speev","lang","language"]);
         }
         var count = 0;
         $(entry).each(function(){
@@ -820,11 +820,6 @@ function displayPokemon(){
                 row += "-";
             }
             row += "</td>";
-			//Checked
-			row += "<td class=\"checked " + pokemon.checked + "\">" + pokemon.checked + "</td>";
-			//Proofed
-			row += "<td class=\"proof " + pokemon.proof + "\">" + pokemon.proof + "</td>";
-            // Egg Moves
             row += "<td class=\"moves" +  (pokemon.eggMoves.length > 0 || !isForIndividualPokemon ? " hidden" : '') + "\">" + pokemon.moves.join(', ') + "</td>";      
             row += "<td class=\"egg-moves" +  (pokemon.eggMoves.length === 0 && isForIndividualPokemon ? " hidden" : '') + "\">" + pokemon.eggMoves.join(', ') + "</td>";       
             // Poké Balls
@@ -835,7 +830,26 @@ function displayPokemon(){
                 row += " row" + Math.ceil((i + 1)/ 3) + "\">";
                 row += pokemon.balls[i] + "</span>";
             }
-            row += "</td></tr>";
+            row += "</td>";
+			//Checked
+			var ischecked = "";
+			if (pokemon.checked == "X")
+			{
+				ischecked = "✔";
+			} else {
+				ischecked = "✘";
+			}
+			row += "<td class=\"checked\">" + ischecked + "</td>";
+			//Proofed
+			var isproofed = "";
+			if (pokemon.checked == "X")
+			{
+				isproofed = "✔";
+			} else {
+				isproofed = "✘";
+			}
+			row += "<td class=\"proof\">" + isproofed + "</td></tr>";
+            // Egg Moves
             $("tbody").append(row);
             count++;
         });
@@ -938,24 +952,6 @@ function displayPokemon(){
                 line += "<span class=\"language\"> " + $this.data("language") + " |</span>";
                 // Notes
                 line += "<span class=\"notes\"> " + $this.data("notes") + " |</span>";
-				// Checked
-				var checked = "";
-				if ($this.data("checked") == "X") 
-				{
-				    checked = "✔";
-				} else {
-					checked = "✘";
-				}
-				line += "<span class=\"check\"> " + checked + "|</span>";
-				//Proofed
-				var proofed = "";
-				if ($this.data("proof")) 
-				{
-				    proofed = "✔";
-				} else {
-					proofed = "✘";
-				}
-				//line += "<span class=\"proof\"> " + $this.data("proof") + "|</span>";
                 // Add line
                 line = "<span class=\"line\" data-id=\"" + id + "\">" + line + "<br></span>";
                 $markdown.append(line);

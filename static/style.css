@@ -143,7 +143,6 @@ h1 a:focus, h1 a:hover {
 #trainer-info dt {
     width:3em;
 	vertical-align:top;
-	border-bottom:solid 1px #000;
 }
 #trainer-info dt:after {
     content:": "
