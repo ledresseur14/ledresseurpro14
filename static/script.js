@@ -222,7 +222,7 @@ var Pokemon = function() {
     this.gameMark = undefined;
     this.language = "";
     this.notes = "";
-	this.checked = false;
+	this.checked = true;
 	this.proof = false;
     this.genderRatio = function() {
         if (FEMALE_ONLY_POKEMON.indexOf(this.dexNo) > -1) {
