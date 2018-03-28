@@ -842,7 +842,7 @@ function displayPokemon(){
 			row += "<td class=\"checked\">" + ischecked + "</td>";
 			//Proofed
 			var isproofed = "";
-			if (pokemon.checked == "X")
+			if (pokemon.proof == "X")
 			{
 				isproofed = "✔";
 			} else {
