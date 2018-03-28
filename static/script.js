@@ -821,7 +821,7 @@ function displayPokemon(){
             }
             row += "</td>";
 			//Checked
-			//row += "<td class=\"checked " + pokemon.checked + "\">" + pokemon.checked + "</td>";
+			row += "<td class=\"checked " + pokemon.checked + "\">" + pokemon.checked + "</td>";
 			//Proofed
 			//row += "<td class=\"proof " + pokemon.proof + "\">" + pokemon.proof + "</td>";
             // Egg Moves
