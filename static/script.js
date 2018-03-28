@@ -222,6 +222,8 @@ var Pokemon = function() {
     this.gameMark = undefined;
     this.language = "";
     this.notes = "";
+	this.checked = false;
+	this.proof = false;
     this.genderRatio = function() {
         if (FEMALE_ONLY_POKEMON.indexOf(this.dexNo) > -1) {
             return "gender-ratio-1-0";
@@ -613,7 +615,7 @@ function displayPokemon(){
     $.getJSON(getWorksheetUrl(spreadsheetId, worksheetId), function(data) {
         var entry = data.feed.entry;
         if (entry && entry[0]) {
-            isForIndividualPokemon = tryGetValue(entry[0], ["nickname","ot","tid","level","lv","lvl","hpev","atkev","defev","spaev","spdev","speev","lang","language"]);
+            isForIndividualPokemon = tryGetValue(entry[0], ["nickname","ot","tid","level","lv","lvl","hpev","atkev","defev","spaev","spdev","speev","lang","language","checked","proof"]);
         }
         var count = 0;
         $(entry).each(function(){
@@ -678,6 +680,8 @@ function displayPokemon(){
             }
             pokemon.language = tryGetValue(this, ["language", "lang"]);
             pokemon.notes = tryGetValue(this, ["note", "notes", "comment", "comments"]);
+			pokemon.checked = getValue(this.gsx$checked);
+			pokemon.proof = getValue(this.gsx$proof);
             for (var i = 0; i < POKE_BALLS.length; i++) {
                 var pokeBall = POKE_BALLS[i].toLowerCase();
                 if (tryGetValue(this, [pokeBall.replace(' ', ''), pokeBall.slice(0, -5)])) pokemon.balls.push(pokeBall);
@@ -930,6 +934,24 @@ function displayPokemon(){
                 line += "<span class=\"language\"> " + $this.data("language") + " |</span>";
                 // Notes
                 line += "<span class=\"notes\"> " + $this.data("notes") + " |</span>";
+				// Checked
+				var checked = "";
+				if ($this.data("checked")) 
+				{
+				    checked = "✔";
+				} else {
+					checked = "✘";
+				}
+				line += "<span class=\"check\"> " + checked + "|</span>";
+				//Proofed
+				var proofed = "";
+				if ($this.data("proof")) 
+				{
+				    proofed = "✔";
+				} else {
+					proofed = "✘";
+				}
+				line += "<span class=\"proof\"> " + $this.data("proof") + "|</span>";
                 // Add line
                 line = "<span class=\"line\" data-id=\"" + id + "\">" + line + "<br></span>";
                 $markdown.append(line);
