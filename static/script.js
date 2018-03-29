@@ -275,14 +275,28 @@ var Pokemon = function() {
 };
 // Functions
 
-$(document).ready(function() {
-ShowTime();
-});
-function ShowTime() {
-var dt = new Date();
-document.getElementById("lblTime").innerHTML = dt.toLocaleTimeString();
-window.setTimeout("ShowTime()", 1000); // Here 1000(milliseconds) means one 1 Sec  
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
 }
+
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    // add a zero in front of numbers<10
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('lblTime').innerHTML = h + ":" + m + ":" + s;
+    t = setTimeout(function () {
+        startTime()
+    }, 500);
+}
+startTime();
+
 
 function getSpriteClass(pokemon) {
     var cssClass = pokemon.name;
