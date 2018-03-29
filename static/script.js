@@ -1043,12 +1043,12 @@ $(document).ready(function() {
                 trainerInfo += "<dd> " + friendCode + "</dd><br />";
                 trainerInfo += "<dt><abbr title=\"Discord\">Discord</abbr></dt>";
                 trainerInfo += "<dd> " + contactUrl + "</dd><br />";
+		trainerInfo += "<dt><abbr title=\"My Time\">Time</abbr></dt>";
+                trainerInfo += "<dd><a href=\"https://www.worldtimebuddy.com/\" target=\"_blank\">Amsterdam (Calculate my time? Click <b>here</b></a>)</dd><br />";
                 trainerInfo += "<dt><abbr title=\"Info\">Info</abbr></dt>";
-                trainerInfo += "<dd>Click a pokemon for information about it! <br />As far as i know all pokemons are legal. <br />We can contact someone (Team C.E.A.L.) <br />To do a legit check if needed!</dd><br />";
+                trainerInfo += "<dd>Most of the times i am available on discord from 4PM till 10/11PM<br />Click a pokemon for information about it! <br />As far as i know all pokemons are legal. <br />We can contact someone (Team C.E.A.L.) <br />To do a legit check if needed!</dd><br />";
                 trainerInfo += "<dt><abbr title=\"Wanted\">Wanted</abbr></dt>";
                 trainerInfo += "<dd>Events i don't have in my list or rares</dd><br />";		
-		trainerInfo += "<dt><abbr title=\"My Time\">Zone</abbr></dt>";
-                trainerInfo += "<dd><a href=\"https://www.worldtimebuddy.com/\" target=\"_blank\">Amsterdam (Calculate my timezone? Click here</a>)</dd><br />";
             trainerInfo += "</dl>";
             $("#trainer-info").prepend(trainerInfo);
         }
