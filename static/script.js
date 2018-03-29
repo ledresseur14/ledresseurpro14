@@ -274,6 +274,29 @@ var Pokemon = function() {
     };
 };
 // Functions
+
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    // add a zero in front of numbers<10
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+    t = setTimeout(function () {
+        startTime()
+    }, 500);
+}
+startTime();
+
 function getSpriteClass(pokemon) {
     var cssClass = pokemon.name;
     switch (pokemon.dexNo) {
@@ -1033,7 +1056,7 @@ $(document).ready(function() {
         }
         // display trainer info
         $("title").text("Kokkie20's Pokémon Trading Sheet");
-        $("header h1").prepend("<a href=\"" + contactUrl + "\">Kokkie20</a>");
+        $("header h1").prepend("Kokkie20");
         if (friendCode || inGameName || contactUrl) {
             var trainerInfo = "";
             trainerInfo += "<dl>";
@@ -1047,8 +1070,8 @@ $(document).ready(function() {
                 trainerInfo += "<dd>Click a pokemon for information about it! <br />As far as i know all pokemons are legal. <br />We can contact someone (Team C.E.A.L.) <br />To do a legit check if needed!</dd><br />";
                 trainerInfo += "<dt><abbr title=\"Wanted\">Wanted</abbr></dt>";
                 trainerInfo += "<dd>Events i don't have in my list or rares</dd><br />";		
-		trainerInfo += "<dt><abbr title=\"Timezone\">Timezone</abbr></dt>";
-                trainerInfo += "<dd>CEST GMT+2 (Netherlands)</dd><br />";		
+		trainerInfo += "<dt><abbr title=\"Timezone\">Time:</abbr></dt>";
+                trainerInfo += "<dd><div id="time"></div></dd><br />";		
             trainerInfo += "</dl>";
             $("#trainer-info").prepend(trainerInfo);
         }
