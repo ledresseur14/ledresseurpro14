@@ -1047,8 +1047,8 @@ $(document).ready(function() {
                 trainerInfo += "<dd>Click a pokemon for information about it! <br />As far as i know all pokemons are legal. <br />We can contact someone (Team C.E.A.L.) <br />To do a legit check if needed!</dd><br />";
                 trainerInfo += "<dt><abbr title=\"Wanted\">Wanted</abbr></dt>";
                 trainerInfo += "<dd>Events i don't have in my list or rares</dd><br />";		
-		trainerInfo += "<dt><abbr title=\"My Current Time\">Country</abbr></dt>";
-                trainerInfo += "<dd>Amsterdam (So you can calculate my timezone!)</dd><br />	
+		trainerInfo += "<dt><abbr title=\"My Country\">Country</abbr></dt>";
+                trainerInfo += "<dd>Amsterdam (So you can calculate my timezone!)</dd><br />";
             trainerInfo += "</dl>";
             $("#trainer-info").prepend(trainerInfo);
         }
