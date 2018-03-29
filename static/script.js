@@ -1048,7 +1048,7 @@ $(document).ready(function() {
                 trainerInfo += "<dt><abbr title=\"Wanted\">Wanted</abbr></dt>";
                 trainerInfo += "<dd>Events i don't have in my list or rares</dd><br />";		
 		trainerInfo += "<dt><abbr title=\"My Time\">Zone</abbr></dt>";
-                trainerInfo += "<dd>Amsterdam (Calculate my timezone by clicking <a href=\"https://www.worldtimebuddy.com/\">> here <</a> !)</dd><br />";
+                trainerInfo += "<dd><a href=\"https://www.worldtimebuddy.com/\" target=\"_blank\">Amsterdam (Calculate my timezone? Click here</a>)</dd><br />";
             trainerInfo += "</dl>";
             $("#trainer-info").prepend(trainerInfo);
         }
