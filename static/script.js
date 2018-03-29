@@ -1059,7 +1059,7 @@ $(document).ready(function() {
                 trainerInfo += "<dd>Events i don't have in my list or rares</dd><br />";		
 		//trainerInfo += "<dt><abbr title=\"Timezone\">Time:</abbr></dt>";
                 //trainerInfo += "<dd><label id=\"lblTime\" style=\" font-weight:bold\"></label></dd><br />";		
-            //trainerInfo += "</dl>";
+            trainerInfo += "</dl>";
             $("#trainer-info").prepend(trainerInfo);
         }
         // display Pokémon
