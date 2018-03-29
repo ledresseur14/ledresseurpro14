@@ -222,8 +222,9 @@ var Pokemon = function() {
     this.gameMark = undefined;
     this.language = "";
     this.notes = "";
-	this.checked = false;
-	this.proof = false;
+    this.checked = false;
+    this.proof = false;
+    this.rarity = "";
     this.genderRatio = function() {
         if (FEMALE_ONLY_POKEMON.indexOf(this.dexNo) > -1) {
             return "gender-ratio-1-0";
@@ -680,8 +681,9 @@ function displayPokemon(){
             }
             pokemon.language = tryGetValue(this, ["language", "lang"]);
             pokemon.notes = tryGetValue(this, ["note", "notes", "comment", "comments"]);
-			pokemon.checked = getValue(this.gsx$checked);
-			pokemon.proof = getValue(this.gsx$proof);
+	    pokemon.checked = getValue(this.gsx$checked);
+	    pokemon.proof = getValue(this.gsx$proof);
+	    pokemon.rarity = getValue(this.gsx$rarity);
             for (var i = 0; i < POKE_BALLS.length; i++) {
                 var pokeBall = POKE_BALLS[i].toLowerCase();
                 if (tryGetValue(this, [pokeBall.replace(' ', ''), pokeBall.slice(0, -5)])) pokemon.balls.push(pokeBall);
@@ -848,7 +850,8 @@ function displayPokemon(){
 			} else {
 				isproofed = "✘";
 			}
-			row += "<td class=\"proof\">" + isproofed + "</td></tr>";
+			row += "<td class=\"proof\">" + isproofed + "</td>";
+			row += "<td class=\"rarity\">" + pokemon.rarity + "</td></tr>";
             // Egg Moves
             $("tbody").append(row);
             count++;
