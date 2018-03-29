@@ -1057,9 +1057,9 @@ $(document).ready(function() {
                 trainerInfo += "<dd>Click a pokemon for information about it! <br />As far as i know all pokemons are legal. <br />We can contact someone (Team C.E.A.L.) <br />To do a legit check if needed!</dd><br />";
                 trainerInfo += "<dt><abbr title=\"Wanted\">Wanted</abbr></dt>";
                 trainerInfo += "<dd>Events i don't have in my list or rares</dd><br />";		
-		trainerInfo += "<dt><abbr title=\"Timezone\">Time:</abbr></dt>";
-                trainerInfo += "<dd><label id=\"lblTime\" style=\" font-weight:bold\"></label></dd><br />";		
-            trainerInfo += "</dl>";
+		//trainerInfo += "<dt><abbr title=\"Timezone\">Time:</abbr></dt>";
+                //trainerInfo += "<dd><label id=\"lblTime\" style=\" font-weight:bold\"></label></dd><br />";		
+            //trainerInfo += "</dl>";
             $("#trainer-info").prepend(trainerInfo);
         }
         // display Pokémon
