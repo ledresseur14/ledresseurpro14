@@ -274,6 +274,16 @@ var Pokemon = function() {
     };
 };
 // Functions
+
+$(document).ready(function() {
+ShowTime();
+});
+function ShowTime() {
+var dt = new Date();
+document.getElementById("lblTime").innerHTML = dt.toLocaleTimeString();
+window.setTimeout("ShowTime()", 1000); // Here 1000(milliseconds) means one 1 Sec  
+}
+
 function getSpriteClass(pokemon) {
     var cssClass = pokemon.name;
     switch (pokemon.dexNo) {
@@ -1048,7 +1058,7 @@ $(document).ready(function() {
                 trainerInfo += "<dt><abbr title=\"Wanted\">Wanted</abbr></dt>";
                 trainerInfo += "<dd>Events i don't have in my list or rares</dd><br />";		
 		trainerInfo += "<dt><abbr title=\"Timezone\">Time:</abbr></dt>";
-                trainerInfo += "<dd><label id="lblTime" style=" font-weight:bold"></label></dd><br />";		
+                trainerInfo += "<dd><label id=\"lblTime\" style=\" font-weight:bold\"></label></dd><br />";		
             trainerInfo += "</dl>";
             $("#trainer-info").prepend(trainerInfo);
         }
