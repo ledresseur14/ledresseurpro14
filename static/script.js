@@ -851,6 +851,11 @@ function displayPokemon(){
 				isproofed = "✘";
 			}
 			row += "<td class=\"proof\">" + isproofed + "</td>";
+		
+		if (pokemon.rarity == "")
+		{
+			pokemon.rarity = " ");
+		}
 			row += "<td class=\"rarity\">" + pokemon.rarity + "</td></tr>";
             // Egg Moves
             $("tbody").append(row);
