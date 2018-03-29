@@ -852,7 +852,7 @@ function displayPokemon(){
 			}
 			row += "<td class=\"proof\">" + isproofed + "</td>";
 		
-		if (pokemon.rarity == "")
+		if (pokemon.rarity == "undefined")
 		{
 			pokemon.rarity = " ");
 		}
