@@ -851,7 +851,7 @@ function displayPokemon(){
 				isproofed = "✘";
 			}
 			row += "<td class=\"proof\">" + isproofed + "</td>";
-		if(pokemon.rarity == "undefined")
+		if(pokemon.rarity === undefined)
 		{
 			row += "<td class=\"rarity\"> </td></tr>";
 		} else 
