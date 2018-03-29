@@ -274,31 +274,6 @@ var Pokemon = function() {
     };
 };
 // Functions
-function DisplayTime(timeZoneOffsetminutes){
-if (!document.all && !document.getElementById)
-return
-timeElement=document.getElementById? document.getElementById("curTime"): document.all.tick2
-var requiredDate=getTimeZoneTimeObj(timeZoneOffsetminutes)
-var hours=requiredDate.h;
-var minutes=requiredDate.m;
-var seconds=requiredDate.s;
-var DayNight="PM";
-if (hours<12) DayNight="AM";
-if (hours>12) hours=hours-12;
-if (hours==0) hours=12;
-if (minutes<=9) minutes="0"+minutes;
-if (seconds<=9) seconds="0"+seconds;
-var currentTime=hours+":"+minutes+" "+DayNight;
-timeElement.innerHTML= currentTime;
-setTimeout("DisplayTime(-330)",1000)
-}
-window.onload=DisplayTime(-120);
-function getTimeZoneTimeObj(timeZoneOffsetminutes){
-   var localdate = new Date()
-   var timeZoneDate = new Date(localdate.getTime() + ((localdate.getTimezoneOffset()- timeZoneOffsetminutes)*60*1000));
-  return {'h':timeZoneDate.getHours(),'m':timeZoneDate.getMinutes(),'s':timeZoneDate.getSeconds()};
-}
-
 function getSpriteClass(pokemon) {
     var cssClass = pokemon.name;
     switch (pokemon.dexNo) {
