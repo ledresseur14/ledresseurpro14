@@ -274,44 +274,29 @@ var Pokemon = function() {
     };
 };
 // Functions
-
-var clockID;
-var yourTimeZoneFrom = +2.00; //time zone value where you are at
-
-var d = new Date();  
-//get the timezone offset from local time in minutes
-var tzDifference = yourTimeZoneFrom * 60 + d.getTimezoneOffset();
-//convert the offset to milliseconds, add to targetTime, and make a new Date
-var offset = tzDifference * 60 * 1000;
-
-function UpdateClock() {
-    var tDate = new Date(new Date().getTime()+offset);
-    var in_hours = tDate.getHours()
-    var in_minutes=tDate.getMinutes();
-    var in_seconds= tDate.getSeconds();
-
-    if(in_minutes < 10)
-        in_minutes = '0'+in_minutes;
-    if(in_seconds<10)   
-        in_seconds = '0'+in_seconds;
-    if(in_hours<10) 
-        in_hours = '0'+in_hours;
-
-   document.getElementById('lblTime').innerHTML = "My current time is " 
-                   + in_hours + ":" 
-                   + in_minutes + ":" 
-                   + in_seconds;
-
+function DisplayTime(timeZoneOffsetminutes){
+if (!document.all && !document.getElementById)
+return
+timeElement=document.getElementById? document.getElementById("curTime"): document.all.tick2
+var requiredDate=getTimeZoneTimeObj(timeZoneOffsetminutes)
+var hours=requiredDate.h;
+var minutes=requiredDate.m;
+var seconds=requiredDate.s;
+var DayNight="PM";
+if (hours<12) DayNight="AM";
+if (hours>12) hours=hours-12;
+if (hours==0) hours=12;
+if (minutes<=9) minutes="0"+minutes;
+if (seconds<=9) seconds="0"+seconds;
+var currentTime=hours+":"+minutes+" "+DayNight;
+timeElement.innerHTML= currentTime;
+setTimeout("DisplayTime(-330)",1000)
 }
-function StartClock() {
-   clockID = setInterval(UpdateClock, 500);
-}
-
-function KillClock() {
-  clearTimeout(clockID);
-}
-window.onload=function() {
-  StartClock();
+window.onload=DisplayTime(-120);
+function getTimeZoneTimeObj(timeZoneOffsetminutes){
+   var localdate = new Date()
+   var timeZoneDate = new Date(localdate.getTime() + ((localdate.getTimezoneOffset()- timeZoneOffsetminutes)*60*1000));
+  return {'h':timeZoneDate.getHours(),'m':timeZoneDate.getMinutes(),'s':timeZoneDate.getSeconds()};
 }
 
 function getSpriteClass(pokemon) {
@@ -1087,9 +1072,9 @@ $(document).ready(function() {
                 trainerInfo += "<dd>Click a pokemon for information about it! <br />As far as i know all pokemons are legal. <br />We can contact someone (Team C.E.A.L.) <br />To do a legit check if needed!</dd><br />";
                 trainerInfo += "<dt><abbr title=\"Wanted\">Wanted</abbr></dt>";
                 trainerInfo += "<dd>Events i don't have in my list or rares</dd><br />";		
-		trainerInfo += "<dt><abbr title=\"My Current Time\">Time</abbr></dt>";
-                trainerInfo += "<dd><label id=\"lblTime\"></label></dd><br />	
-            trainerInfo += "</dl>";
+		//trainerInfo += "<dt><abbr title=\"My Current Time\">Time</abbr></dt>";
+                //trainerInfo += "<dd><label id=\"lblTime\"></label></dd><br />	
+            //trainerInfo += "</dl>";
             $("#trainer-info").prepend(trainerInfo);
         }
         // display Pokémon
