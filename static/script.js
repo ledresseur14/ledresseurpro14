@@ -275,27 +275,14 @@ var Pokemon = function() {
 };
 // Functions
 
-function checkTime(i) {
-    if (i < 10) {
-        i = "0" + i;
-    }
-    return i;
+$(document).ready(function() {
+ShowTime();
+});
+function ShowTime() {
+var dt = new Date();
+document.getElementById("lblTime").innerHTML = dt.toLocaleTimeString();
+window.setTimeout("ShowTime()", 1000); // Here 1000(milliseconds) means one 1 Sec  
 }
-
-function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    // add a zero in front of numbers<10
-    m = checkTime(m);
-    s = checkTime(s);
-    document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
-    t = setTimeout(function () {
-        startTime()
-    }, 500);
-}
-startTime();
 
 function getSpriteClass(pokemon) {
     var cssClass = pokemon.name;
@@ -1071,7 +1058,7 @@ $(document).ready(function() {
                 trainerInfo += "<dt><abbr title=\"Wanted\">Wanted</abbr></dt>";
                 trainerInfo += "<dd>Events i don't have in my list or rares</dd><br />";		
 		trainerInfo += "<dt><abbr title=\"Timezone\">Time:</abbr></dt>";
-                trainerInfo += "<dd><div id="time"></div></dd><br />";		
+                trainerInfo += "<dd><label id="lblTime" style=" font-weight:bold"></label></dd><br />";		
             trainerInfo += "</dl>";
             $("#trainer-info").prepend(trainerInfo);
         }
