@@ -301,11 +301,11 @@ td.moves,td.egg-moves { line-height:1.45 }
 td.sprite{width:3.5em;max-width:3.5em}
 
 td.rto { 
-	color:#ff9900;
+	color:#009900;
 	font-weight: bold;
 }
 td.vrto { 
-	color:#ff3300;
+	color:#ff9900;
 	font-weight: bold;
 }
 td.nft { 
@@ -313,7 +313,7 @@ td.nft {
 	font-weight: bold;
 }
 td.friend { 
-	color:#003399;
+	color:#e6c300;
 	font-weight: bold;
 }
 
