@@ -851,12 +851,21 @@ function displayPokemon(){
 				isproofed = "✘";
 			}
 			row += "<td class=\"proof\">" + isproofed + "</td>";
-		if(pokemon.rarity === undefined)
+		if(pokemon.rarity == "RTO")
 		{
+			row += "<td class=\"rto\">" + pokemon.rarity + "</td></tr>";
+		} else if (pokemon.rarity == "VRTO")
+		{
+			row += "<td class=\"vrto\">" + pokemon.rarity + "</td></tr>";
+		} else if (pokemon.rarity == "NFT")
+		{
+			row += "<td class=\"nft\">" + pokemon.rarity + "</td></tr>";
+		} else if (pokemon.rarity == "Friend Only")
+		{
+			row += "<td class=\"friend\">" + pokemon.rarity + "</td></tr>";
+		}
+		else {
 			row += "<td class=\"rarity\"> </td></tr>";
-		} else 
-		{
-			row += "<td class=\"rarity\">" + pokemon.rarity + "</td></tr>";
 		}
 			
             // Egg Moves
