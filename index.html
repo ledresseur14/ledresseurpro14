@@ -9,6 +9,7 @@
     <script src="static/config.js"></script>
     <script>
 	$(document).ready(function(){
+	    $("trainer-info").hide();
             $("button").click(function(){
             $("trainer-info").toggle("slow");
             });
@@ -30,7 +31,7 @@
     <header>
 	    <h1>'s Pokémon Trading Sheet</h1><br />
 	    <button>Click here to toggle information</button>
-        <div id="trainer-info" class="hidden">
+        <div id="trainer-info">
 	    <dl>
 	    <dt><abbr title="In-Game Name">IGN</abbr></dt>
 	    <dd> " + inGameName + "</dd><br />
