@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="static/bootstrap.min.css">
     <link rel="stylesheet" href="static/style.css">
     <script src="static/config.js"></script>
+    <script>
+	$(document).ready(function(){
+            $("button").click(function(){
+            $("trainer-info").toggle("slow");
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -21,8 +28,25 @@
         <img src="static/types.png" class="hidden">
     </div>
     <header>
-        <h1>'s Pokémon Trading Sheet</h1>
-        <div id="trainer-info">
+	    <h1>'s Pokémon Trading Sheet</h1><br />
+	    <button>Click here to toggle information</button>
+        <div id="trainer-info" class="hidden">
+	    <dl>
+	    <dt><abbr title="In-Game Name">IGN</abbr></dt>
+	    <dd> " + inGameName + "</dd><br />
+	    <dt><abbr title="Friend Code">FC</abbr></dt>
+	    <dd> " + friendCode + "</dd><br />
+	    <dt><abbr title="Discord">Discord</abbr></dt>
+	    <dd> " + contactUrl + "</dd><br />
+	    <dt><abbr title="My Time">Time</abbr></dt>
+	    <dd><a href="https://www.worldtimebuddy.com/" target=\"_blank\">Amsterdam (Calculate my time? Click <b>here</b></a>)</dd><br />
+	    <dt><abbr title="Info">Info</abbr></dt>
+	    <dd>I'm mostly available on discord from 4PM till 10/11PM<br />Click a pokemon for information about it! <br />As far as i know all pokemons are legal. <br />We can contact someone (Team C.E.A.L.) <br />To do a legit check if needed!</dd><br />
+	    <dt><abbr title="Wanted">Wanted</abbr></dt>
+	    <dd>Events i don't have in my list or rares</dd><br />
+	    <dt><abbr title="Services">Services</abbr></dt>
+            <dd>Cloning, TSV/ESV check</dd><br />
+            </dl>
         </div>
         <nav>
             <ul></ul>
