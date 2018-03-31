@@ -1053,26 +1053,7 @@ $(document).ready(function() {
         // display trainer info
         $("title").text("Kokkie20's Pokémon Trading Sheet");
         $("header h1").prepend("Kokkie20");
-        if (friendCode || inGameName || contactUrl) {
-            var trainerInfo = "";
-            trainerInfo += "<dl>";
-                trainerInfo += "<dt><abbr title=\"In-Game Name\">IGN</abbr></dt>";
-                trainerInfo += "<dd> " + inGameName + "</dd><br />";
-                trainerInfo += "<dt><abbr title=\"Friend Code\">FC</abbr></dt>";
-                trainerInfo += "<dd> " + friendCode + "</dd><br />";
-                trainerInfo += "<dt><abbr title=\"Discord\">Discord</abbr></dt>";
-                trainerInfo += "<dd> " + contactUrl + "</dd><br />";
-		trainerInfo += "<dt><abbr title=\"My Time\">Time</abbr></dt>";
-                trainerInfo += "<dd><a href=\"https://www.worldtimebuddy.com/\" target=\"_blank\">Amsterdam (Calculate my time? Click <b>here</b></a>)</dd><br />";
-                trainerInfo += "<dt><abbr title=\"Info\">Info</abbr></dt>";
-                trainerInfo += "<dd>I'm mostly available on discord from 4PM till 10/11PM<br />Click a pokemon for information about it! <br />As far as i know all pokemons are legal. <br />We can contact someone (Team C.E.A.L.) <br />To do a legit check if needed!</dd><br />";
-                trainerInfo += "<dt><abbr title=\"Wanted\">Wanted</abbr></dt>";
-                trainerInfo += "<dd>Events i don't have in my list or rares</dd><br />";	
-		trainerInfo += "<dt><abbr title=\"Services\">Services</abbr></dt>";
-                trainerInfo += "<dd>Cloning, TSV/ESV check</dd><br />";
-            trainerInfo += "</dl>";
-            $("#trainer-info").prepend(trainerInfo);
-        }
+
         // display Pokémon
         displayPokemon();
         // add button links to other tabs
