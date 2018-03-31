@@ -126,7 +126,6 @@ h1 a:focus, h1 a:hover {
 }
 
 #center {
-  display: table;
   margin-right: auto;
   margin-left: auto;
 }
