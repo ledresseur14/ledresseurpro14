@@ -130,6 +130,10 @@ h1 a:focus, h1 a:hover {
   margin-left: auto;
 }
 
+#togg {
+  text-align: center;
+  }
+
 #trainer-info {
     width: 50%;
     margin: 0 auto;
