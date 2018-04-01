@@ -374,7 +374,7 @@ dd.adamant ~ dt.ivs + dd .spa, dd.jolly ~ dt.ivs + dd .spa, dd.impish ~ dt.ivs +
 dd.naive ~ dt.ivs + dd .spd, dd.rash ~ dt.ivs + dd .spd, td.naughty  ~ td.spd,
 dd.brave ~ dt.ivs + dd .spe, dd.quiet ~ dt.ivs + dd .spe, dd.sassy ~ dt.ivs + dd .spe, dd.relaxed ~ dt.ivs + dd .spe{ color: #0000d0; }
 
-tr.hidden-ability .ability { font-style: italic; }
+tr.hidden-ability .ability { font-style: italic; font-weight: bold; }
 
 td.rows2 .item-sprite.row1,
 td.rows3 .item-sprite.row1,
