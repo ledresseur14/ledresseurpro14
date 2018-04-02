@@ -15,8 +15,12 @@
     <script>
 	$(document).ready(function(){
 	    $('div#trainer-info').hide();
-            $('button').click(function(){
+		$('div#filters').hide();
+            $('button#toggleInfo').click(function(){
                $('div#trainer-info').toggle();
+            });
+			$('button#toggleFilter').click(function(){
+               $('div#filters').toggle();
             });
         });
     </script>
@@ -36,7 +40,7 @@
     <header>
 	    <div id="center">
 	    <h1>'s Pokémon Trading Sheet</h1>
-	    <p id="togg"><button>Click here to hide/show info</button></p>
+	    <p id="toggInfo"><button id="toggleInfo">Toggle info</button> <button id="toggleFilter">Toggle Filters</button></p><br />
         <div id="trainer-info">
 	    <dl>
 	    <dt><abbr title="In-Game Name">IGN</abbr></dt>
@@ -45,6 +49,10 @@
 	    <dd>2595-5634-2087</dd><br />
 	    <dt><abbr title="Discord">Discord</abbr></dt>
 	    <dd>TheJigmeister#4272</dd><br />
+		<dt><abbr title="Discord">Gamefaqs</abbr></dt>
+	    <dd>Kokkie20</dd><br />
+		<dt><abbr title="Discord">Reddit</abbr></dt>
+	    <dd>Kokkie20</dd><br />
 	    <dt><abbr title="My Time">Time</abbr></dt>
 	    <dd><a href="https://www.worldtimebuddy.com/" target=\"_blank\">Amsterdam (Calculate my time? Click <b>here</b></a>)</dd><br />
 	    <dt><abbr title="Info">Info</abbr></dt>
@@ -52,14 +60,101 @@
 	    <dt><abbr title="Wanted">Wanted</abbr></dt>
 	    <dd>Events i don't have in my list or rares</dd><br />
 	    <dt><abbr title="Services">Services</abbr></dt>
-            <dd>Cloning, TSV/ESV check</dd><br />
+            <dd>Cloning, TSV/ESV check, KOR + JAP redeem</dd><br />
             </dl>
         </div>
-	    </div>	    
+	    </div>
+		<br />
         <nav>
             <ul></ul>
         </nav>
     </header>
+	    <div id="filters">
+        <h3>Filters</h3>
+        <div class="filter">
+            <label for="gen-filter">Generation</label><!--
+            --><select id="gen-filter" multiple="multiple">
+                <option value="gen1">Generation I</option>
+                <option value="gen2">Generation II</option>
+                <option value="gen3">Generation III</option>
+                <option value="gen4">Generation IV</option>
+                <option value="gen5">Generation V</option>
+                <option value="gen6">Generation VI</option>
+                <option value="gen7">Generation VII</option>
+            </select>
+        </div><!--
+        --><div class="filter">
+            <label for="ball-filter">Poké Ball</label><!--
+            --><select id="ball-filter" multiple="multiple">
+                <option value="poke-ball">Poké Ball</option>
+                <option value="great-ball">Great Ball</option>
+                <option value="ultra-ball">Ultra Ball</option>
+                <option value="safari-ball">Safari Ball</option>
+                <option value="net-ball">Net Ball</option>
+                <option value="dive-ball">Dive Ball</option>
+                <option value="nest-ball">Nest Ball</option>
+                <option value="repeat-ball">Repeat Ball</option>
+                <option value="timer-ball">Timer Ball</option>
+                <option value="luxury-ball">Luxury Ball</option>
+                <option value="premier-ball">Premier Ball</option>
+                <option value="dusk-ball">Dusk Ball</option>
+                <option value="heal-ball">Heal Ball</option>
+                <option value="quick-ball">Quick Ball</option>
+                <option value="fast-ball">Fast Ball</option>
+                <option value="level-ball">Level Ball</option>
+                <option value="lure-ball">Lure Ball</option>
+                <option value="heavy-ball">Heavy Ball</option>
+                <option value="love-ball">Love Ball</option>
+                <option value="friend-ball">Friend Ball</option>
+                <option value="moon-ball">Moon Ball</option>
+                <option value="sport-ball">Sport Ball</option>
+                <option value="dream-ball">Dream Ball</option>
+                <option value="beast-ball">Beast Ball</option>
+            </select>
+        </div><!--
+        --><div class="filter">
+            <label for="ratio-filter">Gender Ratio</label><!--
+            --><select id="ratio-filter" multiple="multiple">
+                <option value="gender-ratio-1-0">Female Only</option>
+                <option value="gender-ratio-0-1">Male Only</option>
+                <option value="gender-ratio-0-0">Genderless</option>
+            </select>
+        </div><!--
+        --><div class="filter">
+            <label for="egg-group-filter">Egg Group</label><!--
+            --><select id="egg-group-filter" multiple="multiple">
+                <option value="egg-group-monster">Monster</option>
+                <option value="egg-group-water1">Water 1</option>
+                <option value="egg-group-bug">Bug</option>
+                <option value="egg-group-flying">Flying</option>
+                <option value="egg-group-field">Field</option>
+                <option value="egg-group-fairy">Fairy</option>
+                <option value="egg-group-grass">Grass</option>
+                <option value="egg-group-human-like">Human-Like</option>
+                <option value="egg-group-water3">Water 3</option>
+                <option value="egg-group-mineral">Mineral</option>
+                <option value="egg-group-amorphous">Amorphous</option>
+                <option value="egg-group-water2">Water 2</option>
+                <option value="egg-group-dragon">Dragon</option>
+                <option value="egg-group-undiscovered">Undiscovered</option>
+            </select>
+        </div><!--
+        --><div class="filter">
+            <label for="misc-filter"><abbr title="Miscellaneous">Misc.</abbr></label><!--
+            --><select id="misc-filter" multiple="multiple">
+                <option value="baby">Baby Only</option>
+                <option value="hidden-ability">Hidden Ability Only</option>
+                <option value="hidden-power">Hidden Power Only</option>
+                <option value="shiny">Shiny Only</option>
+                <option value="legend">Legend Only</option>
+                <option value="sublegend">Sub-Legend Only</option>
+            </select>
+        </div><!--
+        --><div class="filter">
+            <label for="search-bar">Search</label><!--
+            --><input id="search-bar" type="search">
+        </div>
+    </div>
     <table>
         <thead>
             <tr>
