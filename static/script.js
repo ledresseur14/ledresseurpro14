@@ -1050,9 +1050,6 @@ $(document).ready(function() {
         if (!isNaN(hash) && hash) {
             worksheetId = hash;
         }
-        // display trainer info
-        $("title").text("Kokkie20's Pokémon Trading Sheet");
-        $("header h1").prepend("Kokkie20");
 
         // display Pokémon
         displayPokemon();
