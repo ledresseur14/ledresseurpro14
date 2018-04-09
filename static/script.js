@@ -368,6 +368,29 @@ function getModelUrl(dexNo, spriteClass, gender, isShiny) {
             modelUrl  = "http://www.smogon.com/dex/media/sprites/xy/xurkitree";
         }
     }
+	
+    if (dexNo == 803) {
+	modelUrl = "";
+	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/";
+	modelUrl += (isShiny ? "Shiny" : '') + "Poipole";
+    } else if (dexNo == 804) {
+	modelUrl = "";
+	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/";
+	modelUrl += (isShiny ? "Shiny" : '') + "Naganadel";
+    } else if (dexNo == 805) {
+	modelUrl = "";
+	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/";
+	modelUrl += (isShiny ? "Shiny" : '') + "Stakataka";
+    } else if (dexNo == 806) {
+	modelUrl = "";
+	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/";
+	modelUrl += (isShiny ? "Shiny" : '') + "Blacephalon";
+    } else if (dexNo == 807) {
+	modelUrl = "";
+	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/";
+	modelUrl += (isShiny ? "Shiny" : '') + "Zeraora";
+    }
+	
     return modelUrl  + ".gif";
 }
 function getTags(pokemon) {
@@ -672,13 +695,13 @@ function displayPokemon(){
             pokemon.evs.spd = getValue(this.gsx$spdev);
             pokemon.evs.spe = getValue(this.gsx$speev);
             pokemon.gameMark = tryGetValue(this, ["genmark", "generationmark", "gamemark"]);
-            if (pokemon.tid) {
-                if (pokemon.gameMark == "Alola Symbol" || pokemon.gameMark == "Black Clover") {
-                    pokemon.tid = ("000000" + pokemon.tid).slice(-6);
-                } else {
-                    pokemon.tid = ("00000" + pokemon.tid).slice(-5);
-                }
-            }
+            //if (pokemon.tid) {
+            //    if (pokemon.gameMark == "Alola Symbol" || pokemon.gameMark == "Black Clover") {
+            //        pokemon.tid = ("000000" + pokemon.tid).slice(-6);
+            //    } else {
+            //        pokemon.tid = ("00000" + pokemon.tid).slice(-5);
+            //    }
+            //}
             pokemon.language = tryGetValue(this, ["language", "lang"]);
             pokemon.notes = tryGetValue(this, ["note", "notes", "comment", "comments"]);
 	    pokemon.checked = getValue(this.gsx$checked);
