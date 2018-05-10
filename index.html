@@ -12,9 +12,11 @@
     <script src="static/bootstrap.multiselect.js"></script>
     <script src="static/clipboard.min.js"></script>
     <script src="static/script.js"></script>
+    <script src="https://unpkg.com/sticky-table-headers"></script>
     <script>
 	$(document).ready(function(){
 	    $('div#trainer-info').hide();
+	    $('table').stickyTableHeaders();
             $('button#toggleInfo').click(function(){
                $('div#trainer-info').toggle();
             });
@@ -34,29 +36,29 @@
         <img src="static/types.png" class="hidden">
     </div>
     <header>
-	        <div id="center">
-	    <h1>Creyni's Pokémon Trading Sheet</h1>
+	    <div id="center">
+	    <h1>Creyni's Emporium</h1>
 	    <p id="toggInfo"><button id="toggleInfo">Toggle info</button></p><br />
         <div id="trainer-info">
 	    <dl>
-	    <dt><abbr title="In Game Name">IGN</abbr></dt>
+	    <dt><abbr title="In-Game Name">IGN</abbr></dt>
 	    <dd>Creyni</dd><br />
-	    <dt><abbr title="Friendcode">FC</abbr></dt>
+	    <dt><abbr title="Friend Code">FC</abbr></dt>
 	    <dd>4227-5626-3259</dd><br />
 	    <dt><abbr title="Discord">Discord</abbr></dt>
 	    <dd>Creyni#0605</dd><br />
-		<dt><abbr title="Gamefaqs">Gamefaqs</abbr></dt>
+		<dt><abbr title="Discord">Gamefaqs</abbr></dt>
 	    <dd>Creyni</dd><br />
-		<dt><abbr title="Reddit">Reddit</abbr></dt>
+		<dt><abbr title="Discord">Reddit</abbr></dt>
 	    <dd>Creyni89</dd><br />
-	    <dt><abbr title="Time">Time</abbr></dt>
-	    <dd><a href="https://www.worldtimebuddy.com/" target=\"_blank\">UTC+1 (Calculate my time? Click <b>here</b></a>)</dd><br />
+	    <dt><abbr title="My Time">Time</abbr></dt>
+	    <dd><a href="https://www.worldtimebuddy.com/" target=\"_blank\">London (Calculate my time? Click <b>here</b></a>)</dd><br />
 	    <dt><abbr title="Info">Info</abbr></dt>
-	    <dd>I'm mostly available on discord from 4PM till 10/11PM<br />Click a pokemon for information about it! <br />As far as i know all pokemons are legal. <br />We can contact someone (Team C.E.A.L.) <br />To do a legit check if needed!</dd><br />
+	    <dd>Feel free to reach me via Discord as my avalabilty fluctutes due to my working hours<br />Click a pokemon to view more detailed information about it! <br />All listed pokemon are proofed and legit. <br /><b><a href="https://docs.google.com/spreadsheets/d/13K687N4E98SCyr7dHNumTRO4NnkPTfVDi2j4CcLAEHA/edit?usp=sharing">Spreadsheet format event list click here</a></b></dd><br />
 	    <dt><abbr title="Wanted">Wanted</abbr></dt>
-	    <dd>GEN7 and GEN6 proofed event's and event codes</dd><br />
+	    <dd>Events I don't have and Lang tags I am missing. My main focus is GEN7 but GEN6 also interess me </dd><br />
 	    <dt><abbr title="Services">Services</abbr></dt>
-            <dd>Cloning, TSV/ESV check, PAL Redeem</dd><br />
+            <dd>Cloning, TSV/ESV check, PAL redeem</dd><br />
             </dl>
         </div>
 	    </div>
@@ -65,11 +67,12 @@
             <ul></ul>
         </nav>
     </header>
-    <table>
+    <table id="Pokemon-List">
         <thead>
             <tr>
                 <th class="name" colspan="2" rowspan="2">Pokémon</th>
                 <th class="trainer" rowspan="2"><abbr title="Original Trainer">OT</abbr></th>
+		    <th class="lang" rowspan="2"><abbr title="Language">Lang</abbr></th>
                 <th class="nature" rowspan="2">Nature</th>
                 <th class="ability" rowspan="2">Ability</th>
                 <th class="ivs" colspan="6"><abbr title="Individual Values">IVs</abbr></th>
@@ -78,7 +81,7 @@
                 <th class="poke-balls" rowspan="2">Poké Ball</th>
 		<th class="check" rowspan="2">Checked</th>
 		<th class="proof" rowspan="2">Proof</th>
-		<th class="proof" rowspan="2">Rarity</th>
+		<th class="rarity" rowspan="2">Rarity</th>
             </tr>
             <tr>
                 <th class="hp"><abbr title="Hit Points">HP</abbr></th>
