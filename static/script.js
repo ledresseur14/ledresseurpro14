@@ -322,6 +322,7 @@ function getSpriteClass(pokemon) {
             case "Hoopa Confined":
             case "Baile Style":
             case "Midday Form":
+	    case "Egg":
             case "Meteor Form":
                 break;
             case "Ash-Greninja":
@@ -342,7 +343,7 @@ function getSpriteClass(pokemon) {
     cssClass = cssClass.toLowerCase().replace(/é/g, 'e').replace(' ', '_').replace('\'', '').replace('.', '').replace(':', '').replace('%', '');
     return cssClass
 }
-function getModelUrl(dexNo, spriteClass, gender, isShiny) {
+function getModelUrl(dexNo, spriteClass, gender, isShiny, form) {
     var modelUrl = "http://www.pkparaiso.com/imagenes/";
     if (dexNo > 721 || spriteClass.endsWith("-alola") || spriteClass.endsWith("-10")) {
         modelUrl += "sol-luna";
@@ -389,8 +390,36 @@ function getModelUrl(dexNo, spriteClass, gender, isShiny) {
 	modelUrl = "";
 	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/";
 	modelUrl += (isShiny ? "Shiny" : '') + "Zeraora";
-    }
-	
+    }	
+    if(form == "Original Cap")
+    {
+	modelUrl = "";
+	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/pikachu-kantocap";
+    } else if (form == "Hoenn Cap")
+    {
+	modelUrl = "";
+	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/pikachu-hoenncap";	    
+    } else if (form == "Sinnoh Cap")
+    {
+	modelUrl = "";
+	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/pikachu-sinnohcap";	    
+    } else if (form == "Unova Cap")
+    {
+	modelUrl = "";
+	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/pikachu-unovacap";
+    } else if (form == "Kalos Cap")
+    {
+	modelUrl = "";
+	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/pikachu-kaloscap";	    
+    } else if (form == "Alola Cap")
+    {
+	modelUrl = "";
+	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/pikachu-alolacap";	    
+    } else if (form == "Partner Cap")
+    {
+	modelUrl = "";
+	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/pikachu-partnercap";
+    }	
     return modelUrl  + ".gif";
 }
 function getTags(pokemon) {
@@ -569,6 +598,7 @@ function populateModal($this) {
     }
     $pokemonInfo.find(".name").text(name);
     var gender = $this.data("gender");
+    var form = $this.data("form");
     if (gender == "F") {
         $pokemonInfo.find(".gender").html("&#x2640;").attr("class", "gender female");
     } else if (gender == "M") {
@@ -585,7 +615,7 @@ function populateModal($this) {
     var generation = Number($this.data("generation"));
     $(new Image())
         .attr("class", "model")
-        .attr("src", getModelUrl(dexNo, spriteClass, gender, isShiny))
+        .attr("src", getModelUrl(dexNo, spriteClass, gender, isShiny, form))
         .appendTo($("#pokemon-info figure")).fadeIn();
     // Trainer
     $pokemonInfo.find(".trainer").next().text($this.data("ot") + " (" + $this.data("tid") + ")");
@@ -748,7 +778,7 @@ function displayPokemon(){
 
             var row = "<tr class=\"" + getTags(pokemon) + "\"" + getData(pokemon) + " data-id=\"" + count + "\">";
             // Sprite
-            row += "<td class=\"sprite\"><span class=\"menu-sprite " + getSpriteClass(pokemon) + "\" title=\"" + pokemon.name + "\">" + pokemon.dexNo + "</span></td>";
+				row += "<td class=\"sprite\"><span class=\"menu-sprite " + getSpriteClass(pokemon) + "\" title=\"" + pokemon.name + "\">" + pokemon.dexNo + "</span></td>";
             // Name
             row += "<td class=\"name\">" + (pokemon.dexNo == 29 || pokemon.dexNo == 32 ? "Nidoran" : pokemon.name);
             if (pokemon.gender == "F") {
@@ -762,6 +792,8 @@ function displayPokemon(){
             row += "</td>";
             // Trainer
             row += "<td class=\"trainer\">" + pokemon.ot + "<br><span class=\"tid\">(" + pokemon.tid + ")</span></td>";
+            //Lang
+	    row += "<td class=\"lang\">" + pokemon.language + "</td>";
             // Nature
             row += "<td class=\"nature " + pokemon.nature.toLowerCase() + "\">" + pokemon.nature + "</td>";
             // Ability
@@ -856,7 +888,7 @@ function displayPokemon(){
                 row += pokemon.balls[i] + "</span>";
             }
             row += "</td>";
-			//Checked
+					//Proofed
 			var ischecked = "";
 			if (pokemon.checked == "X")
 			{
@@ -864,7 +896,7 @@ function displayPokemon(){
 			} else {
 				ischecked = "✘";
 			}
-			row += "<td class=\"checked\">" + ischecked + "</td>";
+			row += "<td class=\"proof\">" + ischecked + "</td>";
 			//Proofed
 			var isproofed = "";
 			if (pokemon.proof == "X")
@@ -883,11 +915,14 @@ function displayPokemon(){
 		} else if (pokemon.rarity == "NFT")
 		{
 			row += "<td class=\"nft\">" + pokemon.rarity + "</td></tr>";
-		} else if (pokemon.rarity == "Friend Only")
+		} else if (pokemon.rarity == "FRIEND")
 		{
-			row += "<td class=\"friend\">" + pokemon.rarity + "</td></tr>";
+			row += "<td class=\"friend\">Friend Only</td></tr>";
 		}
-		else {
+		else if (pokemon.rarity == "LANG")
+		{
+			row += "<td class=\"rarity\">Other Lang</td></tr>";
+		} else {
 			row += "<td class=\"rarity\"> </td></tr>";
 		}
 			
@@ -1060,14 +1095,7 @@ var isForIndividualPokemon = false;
 $(document).ready(function() {
     $.getJSON(getWorksheetUrl(spreadsheetId, 1), function(data) {
         // read config worksheet if exists
-        var entry = data.feed.entry[0];
-        if (entry.gsx$ingamename) {
-            friendCode = getValue(entry.gsx$friendcode) || friendCode;
-            inGameName = getValue(entry.gsx$ingamename) || inGameName;
-            contactUrl = getValue(entry.gsx$contacturl) || contactUrl;
-            trainerIconUrl = getValue(entry.gsx$trainericonurl) || trainerIconUrl;
             worksheetId = 2;
-        }
         // get worksheet from URL, otherwise it defaults to 1st sheet
         var hash = window.location.hash.slice(-1);
         if (!isNaN(hash) && hash) {
