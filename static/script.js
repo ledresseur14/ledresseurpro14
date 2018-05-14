@@ -275,6 +275,19 @@ var Pokemon = function() {
     };
 };
 // Functions
+
+function empty(str)
+{
+    if (typeof str == 'undefined' || !str || str.length === 0 || str === "" || !/[^\s]/.test(str) || /^\s*$/.test(str) || str.replace(/\s/g,"") === "")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 function getSpriteClass(pokemon) {
     var cssClass = pokemon.name;
     switch (pokemon.dexNo) {
@@ -877,7 +890,7 @@ function displayPokemon(){
                 row += "-";
             }
             row += "</td>";
-            row += "<td class=\"moves" +  (pokemon.eggMoves.length > 0 || !isForIndividualPokemon ? " hidden" : '') + "\">" + pokemon.moves.join(', ') + "</td>";      
+            row += "<td class=\"moves hidden" +  (pokemon.eggMoves.length > 0 || !isForIndividualPokemon ? " hidden" : '') + "\">" + pokemon.moves.join(', ') + "</td>";      
             row += "<td class=\"egg-moves" +  (pokemon.eggMoves.length === 0 && isForIndividualPokemon ? " hidden" : '') + "\">" + pokemon.eggMoves.join(', ') + "</td>";       
             // Poké Balls
             row += "<td class=\"poke-balls rows" + Math.ceil(pokemon.balls.length / 3) + "\">";
@@ -909,21 +922,37 @@ function displayPokemon(){
 		if(pokemon.rarity == "RTO")
 		{
 			row += "<td class=\"rto\">" + pokemon.rarity + "</td></tr>";
-		} else if (pokemon.rarity == "VRTO")
+		} 
+		else if (pokemon.rarity == "VRTO")
 		{
 			row += "<td class=\"vrto\">" + pokemon.rarity + "</td></tr>";
-		} else if (pokemon.rarity == "NFT")
+		} 
+		else if (pokemon.rarity == "NFT")
 		{
 			row += "<td class=\"nft\">" + pokemon.rarity + "</td></tr>";
-		} else if (pokemon.rarity == "FRIEND")
+		} 
+		else if (pokemon.rarity == "FRIEND")
 		{
 			row += "<td class=\"friend\">Friend Only</td></tr>";
-		}
+		} 
+		else if (pokemon.rarity == "LNFT")
+		{
+			row += "<td class=\"vrto\">" + pokemon.rarity + "</td></tr>";
+		} 
+		else if (pokemon.rarity == "SNFT")
+		{
+			row += "<td class=\"nft\">" + pokemon.rarity + "</td></tr>";
+		} 
 		else if (pokemon.rarity == "LANG")
 		{
 			row += "<td class=\"rarity\">Other Lang</td></tr>";
-		} else {
+		} 
+		else if (empty(pokemon.rarity)) {
 			row += "<td class=\"rarity\"> </td></tr>";
+		} 
+		else 
+		{
+			row += "<td class=\"rarity\">" + pokemon.rarity + "</td></tr>";
 		}
 			
             // Egg Moves
