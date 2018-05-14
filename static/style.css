@@ -19,6 +19,11 @@ time, mark, audio, video {
     background:transparent;
 }
 
+#header-fixed { 
+    position: fixed; 
+    top: 0px; display:none;
+}
+
 body {
     background-color: #f0f0f0;
     font: 100%/1.5 "Open Sans", Helvetica, Arial, sans-serif;
@@ -328,6 +333,10 @@ td.nft {
 }
 td.friend { 
 	color:#ccad00;
+	font-weight: bold;
+}
+td.rarity { 
+	color:#000000;
 	font-weight: bold;
 }
 
