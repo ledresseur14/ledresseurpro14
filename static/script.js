@@ -225,6 +225,7 @@ var Pokemon = function() {
     this.checked = false;
     this.proof = false;
     this.rarity = "";
+    this.bulbapedia = "";
     this.genderRatio = function() {
         if (FEMALE_ONLY_POKEMON.indexOf(this.dexNo) > -1) {
             return "gender-ratio-1-0";
@@ -445,7 +446,7 @@ function getTags(pokemon) {
     if (LEGENDS.indexOf(pokemon.dexNo) > -1) tags.push("legend");
     if (SUBLEGENDS.indexOf(pokemon.dexNo) > -1) tags.push("sublegend");
     if ((POKEMON_WITH_ALOLA_FORM.indexOf(pokemon.dexNo) > -1 && pokemon.form == "Alola Form") || POKEMON_ALLOWED_ON_VGC17.indexOf(pokemon.dexNo) > -1) tags.push("allowed-on-vgc17");
-    if (["Electric", "Fighting", "Fire", "Grass", "Ground", "Ice", "Rock", "Water"].indexOf(pokemon.hiddenPower) > -1) tags.push("hidden-power");
+    if (["Normal", "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "Fire", "Water", "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"].indexOf(pokemon.hiddenPower) > -1) tags.push("hidden-power");
     Object.keys(EGG_GROUPS).forEach(function(egg_group) {
         if (EGG_GROUPS[egg_group].indexOf(pokemon.dexNo) > -1) tags.push("egg-group-" + egg_group.toLowerCase().replace(' ', ''));
     });
@@ -454,6 +455,10 @@ function getTags(pokemon) {
     }
     return tags.join(' ');
 }
+
+
+
+
 function getData(pokemon) {
     var data = "";
     Object.keys(pokemon).forEach(function(i) {
@@ -612,6 +617,8 @@ function populateModal($this) {
     $pokemonInfo.find(".name").text(name);
     var gender = $this.data("gender");
     var form = $this.data("form");
+    var bulbapedia = $this.data("bulbapedia");
+	var hiddenpower = $this.data("hiddenPower");
     if (gender == "F") {
         $pokemonInfo.find(".gender").html("&#x2640;").attr("class", "gender female");
     } else if (gender == "M") {
@@ -678,6 +685,16 @@ function populateModal($this) {
     $pokemonInfo.find(".prev a").attr("data-id", prevId);
     $pokemonInfo.find(".next a").attr("data-id", nextId);
 }
+
+function isemptynote(notes){
+	if (empty(notes))
+	{
+		return "Unknown";
+	} else {
+		return notes;
+	}
+}
+
 function displayPokemon(){
     $.getJSON(getWorksheetUrl(spreadsheetId, worksheetId), function(data) {
         var entry = data.feed.entry;
@@ -701,7 +718,7 @@ function displayPokemon(){
             pokemon.ivs.spa = getValue(this.gsx$spaiv) || "x";
             pokemon.ivs.spd = getValue(this.gsx$spdiv) || "x";
             pokemon.ivs.spe = getValue(this.gsx$speiv) || "x";
-            pokemon.hiddenPower = getValue(this.gsx$hiddenpower);
+            pokemon.hiddenPower = getValue(this.gsx$hiddenpower) || "Unknown";
             pokemon.moves = [
                 getValue(this.gsx$move1),
                 getValue(this.gsx$move2),
@@ -746,10 +763,12 @@ function displayPokemon(){
             //    }
             //}
             pokemon.language = tryGetValue(this, ["language", "lang"]);
+			notepoke = pokemon.language;
             pokemon.notes = tryGetValue(this, ["note", "notes", "comment", "comments"]);
 	    pokemon.checked = getValue(this.gsx$checked);
 	    pokemon.proof = getValue(this.gsx$proof);
 	    pokemon.rarity = getValue(this.gsx$rarity);
+	    pokemon.bulbapedia = getValue(this.gsx$bulbapedia);
             for (var i = 0; i < POKE_BALLS.length; i++) {
                 var pokeBall = POKE_BALLS[i].toLowerCase();
                 if (tryGetValue(this, [pokeBall.replace(' ', ''), pokeBall.slice(0, -5)])) pokemon.balls.push(pokeBall);
@@ -788,8 +807,7 @@ function displayPokemon(){
                 pokemon.balls.push("Poké Ball");
             }
             if (pokemon.balls.length === 0) pokemon.balls.push("Unknown");
-
-            var row = "<tr class=\"" + getTags(pokemon) + "\"" + getData(pokemon) + " data-id=\"" + count + "\">";
+            var row = "<tr class=\"" + getTags(pokemon) + "\"" + getData(pokemon) + " data-id=\"" + count + "\" title=\"Event: " + isemptynote(pokemon.notes) + " | *Click for more information*\">";
             // Sprite
 				row += "<td class=\"sprite\"><span class=\"menu-sprite " + getSpriteClass(pokemon) + "\" title=\"" + pokemon.name + "\">" + pokemon.dexNo + "</span></td>";
             // Name
@@ -811,6 +829,14 @@ function displayPokemon(){
             row += "<td class=\"nature " + pokemon.nature.toLowerCase() + "\">" + pokemon.nature + "</td>";
             // Ability
             row += "<td class=\"ability\">" + (pokemon.ability.endsWith('*') ? pokemon.ability.slice(0,-1) : pokemon.ability) + "</td>";
+            // Hidden Power
+			if (pokemon.hiddenPower)
+			{
+				var hidden = pokemon.hiddenPower;
+				row += "<td class=\"hidden-power hidden\">" + hidden + "</td>";
+			} else {
+				row += "<td class=\"hidden-power hidden\">Unknown</td>";
+			}
             // EVs
             var evs = [];
             var evTotal = 0;
@@ -863,7 +889,7 @@ function displayPokemon(){
                 if (!legend) legend = stat + " IV";
                 iv = "<abbr class=\"" + stat.toLowerCase() + "\" title=\"" + legend + "\">" + iv + "</abbr>";
                 ivs.push(iv);
-                row += "<td class=\"" + stat.toLowerCase() + (evTotal > 0 ? " rows2" : '') + "\">" + iv;
+                //row += "<td class=\"" + stat.toLowerCase() + (evTotal > 0 ? " rows2" : '') + "\">" + iv;
                 if (evTotal > 0) {
                     row += "<br>";
                     var ev = Number(pokemon.evs[stat.toLowerCase()]);
@@ -880,8 +906,8 @@ function displayPokemon(){
             if (evTotal === 0) evs = "Not EV-trained";
             row += "<td class=\"ivs hidden\">" + ivs + "</td>";
             row += "<td class=\"evs hidden\">" + evs + "</td>";
-            // Hidden Power
-            row += "<td class=\"hidden-power\">";
+			
+            /*row += "<td class=\"hidden-power\">";
             if (pokemon.hiddenPower) {
                 row += "<span title=\"" + pokemon.hiddenPower + "\"";
                 row += " class=\"hidden-power " + pokemon.hiddenPower.toLowerCase() + "\">";
@@ -889,9 +915,9 @@ function displayPokemon(){
             } else {
                 row += "-";
             }
-            row += "</td>";
+            row += "</td>";*/
             row += "<td class=\"moves hidden" +  (pokemon.eggMoves.length > 0 || !isForIndividualPokemon ? " hidden" : '') + "\">" + pokemon.moves.join(', ') + "</td>";      
-            row += "<td class=\"egg-moves" +  (pokemon.eggMoves.length === 0 && isForIndividualPokemon ? " hidden" : '') + "\">" + pokemon.eggMoves.join(', ') + "</td>";       
+            row += "<td class=\"egg-moves hidden" +  (pokemon.eggMoves.length === 0 && isForIndividualPokemon ? " hidden" : '') + "\">" + pokemon.eggMoves.join(', ') + "</td>";       
             // Poké Balls
             row += "<td class=\"poke-balls rows" + Math.ceil(pokemon.balls.length / 3) + "\">";
             for (var i = 0; i < pokemon.balls.length; i++) {
@@ -919,43 +945,50 @@ function displayPokemon(){
 				isproofed = "✘";
 			}
 			row += "<td class=\"proof\">" + isproofed + "</td>";
+		
 		if(pokemon.rarity == "RTO")
 		{
-			row += "<td class=\"rto\">" + pokemon.rarity + "</td></tr>";
+			row += "<td class=\"rto\">" + pokemon.rarity + "</td>";
 		} 
 		else if (pokemon.rarity == "VRTO")
 		{
-			row += "<td class=\"vrto\">" + pokemon.rarity + "</td></tr>";
+			row += "<td class=\"vrto\">" + pokemon.rarity + "</td>";
 		} 
 		else if (pokemon.rarity == "NFT")
 		{
-			row += "<td class=\"nft\">" + pokemon.rarity + "</td></tr>";
+			row += "<td class=\"nft\">" + pokemon.rarity + "</td>";
 		} 
 		else if (pokemon.rarity == "FRIEND")
 		{
-			row += "<td class=\"friend\">Friend Only</td></tr>";
+			row += "<td class=\"friend\">Friend Only</td>";
 		} 
 		else if (pokemon.rarity == "LNFT")
 		{
-			row += "<td class=\"vrto\">" + pokemon.rarity + "</td></tr>";
+			row += "<td class=\"vrto\">" + pokemon.rarity + "</td>";
 		} 
 		else if (pokemon.rarity == "SNFT")
 		{
-			row += "<td class=\"nft\">" + pokemon.rarity + "</td></tr>";
+			row += "<td class=\"nft\">" + pokemon.rarity + "</td>";
 		} 
 		else if (pokemon.rarity == "LANG")
 		{
-			row += "<td class=\"rarity\">Other Lang</td></tr>";
+			row += "<td class=\"rarity\">Other Lang</td>";
 		} 
 		else if (empty(pokemon.rarity)) {
-			row += "<td class=\"rarity\"> </td></tr>";
+			row += "<td class=\"rarity\"> </td>";
 		} 
 		else 
 		{
-			row += "<td class=\"rarity\">" + pokemon.rarity + "</td></tr>";
+			row += "<td class=\"rarity\">" + pokemon.rarity + "</td>";
 		}
-			
-            // Egg Moves
+		//Bulbabedia
+		if (!empty(pokemon.bulbapedia)) {
+			row += "<td class=\"bulba\"><a href=\"" + pokemon.bulbapedia + "\" target=\"_blank\">Click Here</a></td></tr>";
+		} 
+		else {
+			row += "<td class=\"bulba\"> </td></tr>";
+		}
+
             $("tbody").append(row);
             count++;
         });
@@ -973,7 +1006,7 @@ function displayPokemon(){
         $("tbody tr").click(function() {
             var $this = $(this);
             if ($this.hasClass("selected")) {
-                $this.attr("title", "Click to display more information.");
+                $this.attr("title", "Click for more information");
             } else {
                 //$this.attr("title", "Click to remove from Reddit table.")
                 if (isForIndividualPokemon) {
@@ -1040,11 +1073,11 @@ function displayPokemon(){
                     ability = "**" + ability + "**";
                 }
                 line += "<span class=\"ability\"> " + ability + " |</span>";
+				// Hidden Power
+                line += "<span class=\"hidden-power\"> " + $this.data("nature") + " |</span>";
                 // IVs & EVs
                 var statAttributes = $this.find(".ivs").text();
                 line += "<span class=\"ivs\"> " + statAttributes + " |</span>";
-                statAttributes = $this.find(".evs").text();
-                line += "<span class=\"evs\"> " + statAttributes + " |</span>";
                 // Egg Moves
                 line += "<span class=\"egg-moves\"> " + $this.find(".egg-moves").text() + " |</span>";
                 // Poké Balls
@@ -1064,7 +1097,8 @@ function displayPokemon(){
                 toggleCols();
             }
         });
-        $("tbody tr").attr("title", "Click to display more information.");
+        //$("tbody tr").attr("title", $this.data("notes"));
+		//$("tbody tr").attr("title", "Click for more information");
         if (isForIndividualPokemon) {
             $("body").addClass("shiny");
             $("th.ivs").append(" / <abbr title=\"Effort Values\">EVs</abbr>");
