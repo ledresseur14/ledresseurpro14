@@ -226,6 +226,7 @@ var Pokemon = function() {
     this.proof = false;
     this.rarity = "";
     this.bulbapedia = "";
+    this.item = "";
     this.genderRatio = function() {
         if (FEMALE_ONLY_POKEMON.indexOf(this.dexNo) > -1) {
             return "gender-ratio-1-0";
@@ -583,6 +584,7 @@ function disableOption(value) {
 }
 function clearModal() {
     $("#pokemon-info .menu-sprite").remove();
+	$("#pokemon-info .smenu-sprite").remove();
     $("#pokemon-info .item-sprite").remove();
     $("#pokemon-info figure img").remove();
     $("#pokemon-info ul li").remove();
@@ -618,7 +620,11 @@ function populateModal($this) {
     var gender = $this.data("gender");
     var form = $this.data("form");
     var bulbapedia = $this.data("bulbapedia");
-	var hiddenpower = $this.data("hiddenPower");
+    var item = $this.data("item");
+	$pokemonInfo.find(".items").text(isemptyitem(item));
+	var hiddenpower = $this.data("hiddenpower");
+	$pokemonInfo.find(".hiddenpowerss").html("<span title=\"" + hiddenpower + "\" class=\"hidden-power " + hiddenpower.toLowerCase() + "\">" + hiddenpower + "</span>");
+	//$pokemonInfo.find(".hiddenpowerss").text(isemptyhp(hiddenpower));
     if (gender == "F") {
         $pokemonInfo.find(".gender").html("&#x2640;").attr("class", "gender female");
     } else if (gender == "M") {
@@ -628,9 +634,15 @@ function populateModal($this) {
     }
     $pokemonInfo.find(".level").text("Lv. " + $this.data("level"));
     // Pokémon Sprite
-    var $sprite = $this.find(".menu-sprite");
-    var spriteClass = $sprite.attr("class").split(' ')[1];
-    $("#pokemon-info h1").prepend("<span class=\"menu-sprite " + spriteClass + "\">" + $this.data("dexno") + "</span>");
+	if (isShiny) {
+		var $sprite = $this.find(".smenu-sprite");
+        var spriteClass = $sprite.attr("class").split(' ')[1];
+        $("#pokemon-info h1").prepend("<span class=\"smenu-sprite " + spriteClass + "\">" + $this.data("dexno") + "</span>");			
+	} else {
+		var $sprite = $this.find(".menu-sprite");
+        var spriteClass = $sprite.attr("class").split(' ')[1];
+        $("#pokemon-info h1").prepend("<span class=\"menu-sprite " + spriteClass + "\">" + $this.data("dexno") + "</span>");		
+	}
     // Pokémon Model
     var generation = Number($this.data("generation"));
     $(new Image())
@@ -695,11 +707,29 @@ function isemptynote(notes){
 	}
 }
 
+function isemptyitem(items){
+	if (empty(items))
+	{
+		return "None";
+	} else {
+		return items;
+	}
+}
+
+function isemptyhp(hp){
+	if (empty(hp))
+	{
+		return "Unknown";
+	} else {
+		return hp;
+	}
+}
+
 function displayPokemon(){
     $.getJSON(getWorksheetUrl(spreadsheetId, worksheetId), function(data) {
         var entry = data.feed.entry;
         if (entry && entry[0]) {
-            isForIndividualPokemon = tryGetValue(entry[0], ["nickname","ot","tid","level","lv","lvl","hpev","atkev","defev","spaev","spdev","speev","lang","language"]);
+            isForIndividualPokemon = tryGetValue(entry[0], ["nickname","ot","tid","level","lv","lvl","hpev","atkev","defev","spaev","spdev","speev","lang","language","item","hiddenpower"]);
         }
         var count = 0;
         $(entry).each(function(){
@@ -769,6 +799,7 @@ function displayPokemon(){
 	    pokemon.proof = getValue(this.gsx$proof);
 	    pokemon.rarity = getValue(this.gsx$rarity);
 	    pokemon.bulbapedia = getValue(this.gsx$bulbapedia);
+            pokemon.item = getValue(this.gsx$item);
             for (var i = 0; i < POKE_BALLS.length; i++) {
                 var pokeBall = POKE_BALLS[i].toLowerCase();
                 if (tryGetValue(this, [pokeBall.replace(' ', ''), pokeBall.slice(0, -5)])) pokemon.balls.push(pokeBall);
@@ -807,9 +838,14 @@ function displayPokemon(){
                 pokemon.balls.push("Poké Ball");
             }
             if (pokemon.balls.length === 0) pokemon.balls.push("Unknown");
-            var row = "<tr class=\"" + getTags(pokemon) + "\"" + getData(pokemon) + " data-id=\"" + count + "\" title=\"Event: " + isemptynote(pokemon.notes) + " | *Click for more information*\">";
-            // Sprite
-				row += "<td class=\"sprite\"><span class=\"menu-sprite " + getSpriteClass(pokemon) + "\" title=\"" + pokemon.name + "\">" + pokemon.dexNo + "</span></td>";
+            var row = "<tr class=\"" + getTags(pokemon) + "\"" + getData(pokemon) + " data-id=\"" + count + "\" title=\"Event: " + isemptynote(pokemon.notes) + " | *Click for more information*\" item=\"" + isemptyitem(pokemon.item) + "\">";
+            // Sprite                                                                                                          isemptyitem
+			if (pokemon.isShiny == "X")
+			{
+			row += "<td class=\"sprite\"><span class=\"smenu-sprite " + getSpriteClass(pokemon) + "\" title=\"" + pokemon.name + "\">" + pokemon.dexNo + "</span></td>";				
+			} else {
+			row += "<td class=\"sprite\"><span class=\"menu-sprite " + getSpriteClass(pokemon) + "\" title=\"" + pokemon.name + "\">" + pokemon.dexNo + "</span></td>";
+			}
             // Name
             row += "<td class=\"name\">" + (pokemon.dexNo == 29 || pokemon.dexNo == 32 ? "Nidoran" : pokemon.name);
             if (pokemon.gender == "F") {
@@ -837,6 +873,7 @@ function displayPokemon(){
 			} else {
 				row += "<td class=\"hidden-power hidden\">Unknown</td>";
 			}
+			
             // EVs
             var evs = [];
             var evTotal = 0;
@@ -907,15 +944,23 @@ function displayPokemon(){
             row += "<td class=\"ivs hidden\">" + ivs + "</td>";
             row += "<td class=\"evs hidden\">" + evs + "</td>";
 			
-            /*row += "<td class=\"hidden-power\">";
+            row += "<td class=\"hidden-power hidden\">";
             if (pokemon.hiddenPower) {
-                row += "<span title=\"" + pokemon.hiddenPower + "\"";
-                row += " class=\"hidden-power " + pokemon.hiddenPower.toLowerCase() + "\">";
-                row += pokemon.hiddenPower + "</span>";
+			    row += "<span title=\"" + pokemon.hiddenPower + "\" class=\"hidden-power " + pokemon.hiddenPower.toLowerCase() + "\">" + pokemon.hiddenPower + "</span>";
+                //row += "<span title=\"" + pokemon.hiddenPower + "\"";
+                //row += " class=\"hidden-power " + pokemon.hiddenPower.toLowerCase() + "\">";
+                //row += pokemon.hiddenPower + "</span>";
             } else {
                 row += "-";
             }
-            row += "</td>";*/
+            row += "</td>";
+		if (!empty(pokemon.item)) {
+			row += "<td class=\"item hidden\">" + pokemon.item + "</td>";
+		} 
+		else {
+			row += "<td class=\"item hidden\">None</td>";
+		}
+
             row += "<td class=\"moves hidden" +  (pokemon.eggMoves.length > 0 || !isForIndividualPokemon ? " hidden" : '') + "\">" + pokemon.moves.join(', ') + "</td>";      
             row += "<td class=\"egg-moves hidden" +  (pokemon.eggMoves.length === 0 && isForIndividualPokemon ? " hidden" : '') + "\">" + pokemon.eggMoves.join(', ') + "</td>";       
             // Poké Balls
@@ -1073,8 +1118,10 @@ function displayPokemon(){
                     ability = "**" + ability + "**";
                 }
                 line += "<span class=\"ability\"> " + ability + " |</span>";
+				line += "<span class=\"item\"> " + $this.data("item") + " |</span>";
 				// Hidden Power
-                line += "<span class=\"hidden-power\"> " + $this.data("nature") + " |</span>";
+				line += "<span title=\"" + $this.data("hiddenPower") + "\" class=\"hidden-power " + $this.data("hiddenPower") + "\">" + $this.data("hiddenPower") + "</span>";
+                //line += "<span class=\"hidden-power\"> " + $this.data("hiddenPower") + " |</span>";
                 // IVs & EVs
                 var statAttributes = $this.find(".ivs").text();
                 line += "<span class=\"ivs\"> " + statAttributes + " |</span>";
@@ -1103,6 +1150,8 @@ function displayPokemon(){
             $("body").addClass("shiny");
             $("th.ivs").append(" / <abbr title=\"Effort Values\">EVs</abbr>");
             $("th.egg-moves").text("Moves");
+			$("th.item").text("Item");
+			$("th.hiddenpower").text("Hidden Power");
             $("#modal").click(function() {
                 $(this).addClass("hidden");
                 clearModal();
