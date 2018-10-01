@@ -351,7 +351,6 @@ td.name .form,td.name .nickname,td.trainer .tid { font-size:0.75em }
 tr.shiny td.name::before,
 #pokemon-info.shiny .name::before{
     content: "★ ";
-    color:#f11
 }
 
 tr:hover td {
@@ -423,7 +422,6 @@ td.rows4 .item-sprite.row3 { margin:0 0.125em; }
     text-indent:-999em  
 }
 .smenu-sprite{
-    background-image:url(https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/static/smenusprites.png);
     width:1.875em;
     height:1.875em;
     margin:0 0.3125em
@@ -2775,14 +2773,11 @@ body.shiny tbody tr {
 }
 
 #pokemon-info {
-    background: url(bg.png);
-    width: 28em;
     padding: 1em;
     border: 0.0625em solid #333;
-    position: absolute;
-    top:50%;left:50%;
-    margin-left:-14em;
-    margin-top:-10.1875em
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 
