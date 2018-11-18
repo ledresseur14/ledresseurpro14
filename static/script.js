@@ -359,7 +359,6 @@ function getSpriteClass(pokemon) {
     return cssClass
 }
 function getModelUrl(dexNo, spriteClass, gender, isShiny, form) {
-	/*
     var modelUrl = "http://www.pkparaiso.com/imagenes/";
     if (dexNo > 721 || spriteClass.endsWith("-alola") || spriteClass.endsWith("-10")) {
         modelUrl += "sol-luna";
@@ -436,11 +435,7 @@ function getModelUrl(dexNo, spriteClass, gender, isShiny, form) {
 	modelUrl = "";
 	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/pikachu-partnercap";
     }	
-    return modelUrl  + ".gif";*/
-	
-	var imgnr = Math.floor((Math.random() * 100) + 1);
-	modelUrl = "https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/";	
-	return modelUrl + imgnr + ".png";
+    return modelUrl  + ".gif";
 }
 function getTags(pokemon) {
     var tags = [];
@@ -599,12 +594,19 @@ function clearModal() {
     $("#pokemon-info").removeClass("shiny");
 }
 function populateModal($this) {
-	
-
+    var nextId = $this.nextAll().not(".filtered").first();
+    if (nextId.length > 0) {
+        nextId = nextId.data("id");
+    } else {
+        nextId = $this.prevAll().not(".filtered").last().data("id");
+    }
+    var prevId = $this.prevAll().not(".filtered").first();
+    if (prevId.length > 0) {
+        prevId = prevId.data("id");
+    } else {
+        prevId = $this.nextAll().not(".filtered").last().data("id");
+    }
     var $pokemonInfo = $("#pokemon-info");
-	var imgnr = Math.floor((Math.random() * 55) + 1);
-	document.getElementsByClassName('ImageFun')[0].innerHTML = '<img src="https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Funcreyni/' + imgnr + '.png">';
-	/*
     var dexNo = Number($this.data("dexno"));
     var isShiny = $this.data("isshiny");
     if (isShiny) $pokemonInfo.addClass("shiny");
@@ -635,11 +637,11 @@ function populateModal($this) {
 	if (isShiny) {
 		var $sprite = $this.find(".smenu-sprite");
         var spriteClass = $sprite.attr("class").split(' ')[1];
-		//$("#pokemon-info h1").prepend("<span class=\"smenu-sprite " + spriteClass + "\">" + $this.data("dexno") + "</span>");			
+        $("#pokemon-info h1").prepend("<span class=\"smenu-sprite " + spriteClass + "\">" + $this.data("dexno") + "</span>");			
 	} else {
 		var $sprite = $this.find(".menu-sprite");
         var spriteClass = $sprite.attr("class").split(' ')[1];
-        //$("#pokemon-info h1").prepend("<span class=\"menu-sprite " + spriteClass + "\">" + $this.data("dexno") + "</span>");		
+        $("#pokemon-info h1").prepend("<span class=\"menu-sprite " + spriteClass + "\">" + $this.data("dexno") + "</span>");		
 	}
     // Pokémon Model
     var generation = Number($this.data("generation"));
@@ -691,7 +693,9 @@ function populateModal($this) {
         // parse Reddit usernames and subreddits
         notes = notes.replace(/\/?(r|u|user)\/([\w_-]{3,20})(?!\/|\w)/g, "<a href=\"http://reddit.com/$1/$2\">/$1/$2</a>");
         $("#pokemon-info").append("<p class=\"notes\">" + notes + "</p>");
-    }*/
+    }
+    $pokemonInfo.find(".prev a").attr("data-id", prevId);
+    $pokemonInfo.find(".next a").attr("data-id", nextId);
 }
 
 function isemptynote(notes){
@@ -838,21 +842,9 @@ function displayPokemon(){
             // Sprite                                                                                                          isemptyitem
 			if (pokemon.isShiny == "X")
 			{
-			var imgnr = Math.floor((Math.random() * 10) + 1);
-				if(imgnr <= 5){
-					row += "<td class=\"sprite\"><img class=\"menu-sprite\" src=\"https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/1.png\"></td>";	
-					$("#pokemon-info h1").prepend("<span class=\"smenu-sprite\"><img class=\"menu-sprite\" src=\"https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/1.png\"></span>");	
-				} else {
-					row += "<td class=\"sprite\"><img class=\"menu-sprite\" src=\"https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/2.png\"></td>";	
-					$("#pokemon-info h1").prepend("<span class=\"smenu-sprite\"><img class=\"menu-sprite\" src=\"https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/2.png\"></span>");						
-				}
+			row += "<td class=\"sprite\"><span class=\"smenu-sprite " + getSpriteClass(pokemon) + "\" title=\"" + pokemon.name + "\">" + pokemon.dexNo + "</span></td>";				
 			} else {
-			var imgnr = Math.floor((Math.random() * 10) + 1);
-				if(imgnr <= 5){
-					row += "<td class=\"sprite\"><img class=\"menu-sprite\" src=\"https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/1.png\"></td>";	
-				} else {
-					row += "<td class=\"sprite\"><img class=\"menu-sprite\" src=\"https://raw.githubusercontent.com/kokkie20/kokkie20.github.io/master/Images/2.png\"></td>";					
-				}
+			row += "<td class=\"sprite\"><span class=\"menu-sprite " + getSpriteClass(pokemon) + "\" title=\"" + pokemon.name + "\">" + pokemon.dexNo + "</span></td>";
 			}
             // Name
             row += "<td class=\"name\">" + (pokemon.dexNo == 29 || pokemon.dexNo == 32 ? "Nidoran" : pokemon.name);
