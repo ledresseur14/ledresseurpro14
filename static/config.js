@@ -8,7 +8,7 @@ var spreadsheetId = "1Zjh40WdNfIUAiFoEN5SwU_ozurNKNQlj7z2mEsIYJWg";
 // Your FC and IGN
 // ***********************************************************************************
 var friendCode = "3754-7845-5418";
-var inGameName = "ledresseur14;
+var inGameName = "ledresseur14";
 
 // ***********************************************************************************
 // URL of your Reddit/Twitter account
